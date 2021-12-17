@@ -1,11 +1,17 @@
 package com.sheep.sh.myblog.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class User {
 
@@ -22,8 +28,8 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
-    @ColumnDefault("'user'")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private RoleType role;
 
     @CreationTimestamp //시간 자동 입력
     private Timestamp createDate;
