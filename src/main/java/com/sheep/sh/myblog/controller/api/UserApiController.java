@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 public class UserApiController {
 
     private final UserService userService;
+    private final HttpSession session;
 
     @PostMapping("/api/user")
     public ResponseDto<Integer> save(@RequestBody User user) {
@@ -26,8 +27,7 @@ public class UserApiController {
     }
 
     @PostMapping("/api/user/login")
-    public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
-        System.out.println("UserApiCntroller: login호출됨");
+    public ResponseDto<Integer> login(@RequestBody User user){
         User principal =  userService.login(user);
 
         if(principal != null){
