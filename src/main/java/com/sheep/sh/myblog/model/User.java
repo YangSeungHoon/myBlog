@@ -1,14 +1,13 @@
 package com.sheep.sh.myblog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +27,7 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     private RoleType role;
 

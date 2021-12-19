@@ -3,6 +3,9 @@ let index = {
         $("#btn-save").on("click",()=> {
             this.save();
         });
+        $("#btn-login").on("click",()=> {
+            this.login();
+        });
     },
 
     save:function(){
