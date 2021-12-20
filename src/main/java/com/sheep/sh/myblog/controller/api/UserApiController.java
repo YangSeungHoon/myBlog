@@ -16,10 +16,8 @@ public class UserApiController {
 
     private final UserService userService;
 
-
     @PostMapping("/auth/joinProc")
     public ResponseDto<Integer> save(@RequestBody User user) {
-        user.setRole(RoleType.USER);
         userService.userJoin(user);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }
