@@ -1,8 +1,6 @@
 package com.sheep.sh.myblog.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -10,6 +8,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,15 +25,16 @@ public class Board {
     @Lob
     private String content;
 
-    @ColumnDefault("0")
+    @Setter
     private int count;
 
     @CreationTimestamp
     private Timestamp createdDate;
 
+    @Setter
     @ManyToOne(fetch = FetchType.EAGER )
     @JoinColumn(name="userId")
-    private User userId;
+    private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
     private List<Reply> reply;
