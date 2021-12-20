@@ -4,6 +4,8 @@ import com.sheep.sh.myblog.model.Board;
 import com.sheep.sh.myblog.model.User;
 import com.sheep.sh.myblog.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,9 +27,9 @@ public class BoardService {
     }
 
     @Transactional(readOnly = true)
-    public List<Board> getBoardList() {
+    public Page<Board> getBoardList(Pageable pageable) {
 
-        return boardRepository.findAll();
+        return boardRepository.findAll(pageable);
     }
 
 }
