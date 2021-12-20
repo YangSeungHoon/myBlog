@@ -7,8 +7,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-    User findByUsernameAndPassword(String username, String password);
+
+}
+
+
+
+
+//User findByUsernameAndPassword(String username, String password);
 
 //    @Query(value="SELECT * FROM userWHERE usernmae=?1 AND passowrd =?2",nativeQuery = true)
 //    User login(String username,String password);
-}
