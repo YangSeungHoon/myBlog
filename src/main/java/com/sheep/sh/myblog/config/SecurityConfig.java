@@ -2,6 +2,7 @@ package com.sheep.sh.myblog.config;
 
 import com.sheep.sh.myblog.config.auth.PrincipalDetailService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,13 +12,15 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@RequiredArgsConstructor
+
 @Configuration
 @EnableWebSecurity //시큐리티 필터 등록.
 @EnableGlobalMethodSecurity(prePostEnabled = true) // 특정 주소로 접근을 하면 권한 및 인증을 미리 체크한다.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final PrincipalDetailService principal;
+
+    @Autowired
+    private PrincipalDetailService principalDetailService;
 
     @Bean
     public BCryptPasswordEncoder encodePWD() {
@@ -30,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
-        auth.userDetailsService(principal).passwordEncoder(encodePWD());
+        auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
     }
 
     @Override

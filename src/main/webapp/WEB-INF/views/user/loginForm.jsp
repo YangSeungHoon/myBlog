@@ -4,7 +4,7 @@
 <%@ include file="../layout/header.jsp" %>
 
 <div class="container">
-    <form aaction="/auth/loginProc" method="POST">
+    <form action="/auth/loginProc" method="post">
 
         <div class="form-group">
             <label for="username">Username</label>
@@ -20,5 +20,4 @@
     </form>
 </div>
 
-<script src="/js/user.js"></script>
 <%@ include file="../layout/footer.jsp" %>
