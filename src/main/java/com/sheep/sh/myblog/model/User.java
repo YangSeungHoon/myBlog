@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+@Setter
 @Getter
 @Builder
 @AllArgsConstructor
@@ -21,14 +22,13 @@ public class User {
     @Column(nullable = false, length= 30)
     private String username;
 
-    @Setter
+
     @Column(nullable = false, length = 100)
     private String password;
 
     @Column(nullable = false, length = 50)
     private String email;
 
-    @Setter
     @Enumerated(EnumType.STRING)
     private RoleType role;
 
