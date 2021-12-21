@@ -43,4 +43,14 @@ public class BoardService {
     public void deleteBoard(Long id) {
         boardRepository.deleteById(id);
     }
+
+    @Transactional
+    public void updateBoard(Long id, Board requestBoard) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()->
+                new IllegalArgumentException("글 상세보기 실패: 아이디를 찾을 수 없습니다."));
+
+        board.setTitle(requestBoard.getTitle());
+        board.setContent(requestBoard.getContent());
+    }
 }
