@@ -32,4 +32,15 @@ public class BoardService {
         return boardRepository.findAll(pageable);
     }
 
+    public Board detailBoard(Long id) {
+
+        return boardRepository.findById(id)
+                .orElseThrow(()->
+                    new IllegalArgumentException("글 상세보기 실패: 아이디를 찾을 수 없습니다."));
+    }
+
+    @Transactional
+    public void deleteBoard(Long id) {
+        boardRepository.deleteById(id);
+    }
 }
