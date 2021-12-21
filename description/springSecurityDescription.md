@@ -78,12 +78,14 @@ http
 직접적인 일은 Authentication Provider가 수행한다.</span><br><br>
 <img height="400" src="https://user-images.githubusercontent.com/44757063/146941355-6252d095-96b0-4b28-8a50-bcb721dd1ec2.PNG" width="600"/></img>
 <br><br><br>
+
 ### 4. UserDetailsService의 loadUserByUsernmae메서드 실행.
 <br>
 <span style="color:#3498db">- 해당 메서드에서는 Repository에서 user가 있는지 검증하고 가져온다.</span><br>
 <span style="color:#3498db">- return 값으로 찾은 User객체가 아닌, UserDetails를 구현하고 있는 PrincipalDetail이 되어야 한다. </span><br>
 <span style="color:#3498db">- password의 비교는 securityConfig에 있는 cofigure메서드에서 bcryptEncoder를 이용하여 암호화 하고, DB와 비교한다.</span><br>
 <span style="color:#3498db">- return 하면서 시큐리티의 세션에 user의 정보가 저장된다.</span><br>
+<br>
 
 ```java
     public class PrincipalDetailService implements UserDetailsService {
@@ -99,6 +101,7 @@ http
 }
 ```
 
+<br>
 <span style="color:#3498db">SecurityBuilder는 AuthenticationManager를 만드는 데 사용된다. 메모리 인증, LDAP 인증,
 JDBC 기반 인증, UserDetailsService 및 AuthenticationProvider 를 추가할 수 있다.</span><br>
 
@@ -108,7 +111,7 @@ JDBC 기반 인증, UserDetailsService 및 AuthenticationProvider 를 추가할 
         auth.userDetailsService(principalDetailService).passwordEncoder(encodePWD());
     }
 ```
-
+<br>
 
 ## 이런 방법으로 사용.
 <br>
@@ -129,11 +132,13 @@ JDBC 기반 인증, UserDetailsService 및 AuthenticationProvider 를 추가할 
     }
 ```
 
+<br>
 <span style="color:#a29bfe">- 받아온 user를 업데이트 해주고, autenticationManager를 호출하여 인증을 진행한다.</span><br>
 <span style="color:#a29bfe">- 앞선 과정에서와 같이 token을 만들어주는데 변경된 username 과 password를 보내준다.</span><br>
 <span style="color:#a29bfe">- SecurityContextHolder 안에 있는 Context를 꺼내다가 거기에 새로운 authentication객체를 셋팅한다.</span><br>
+<br>
 
-### 로그인된 유저 가져오기.
+### @AuthenticaionPrincipal 어노테이션으로 로그인된 유저 가져오기.
 <br>
 
 ```java
