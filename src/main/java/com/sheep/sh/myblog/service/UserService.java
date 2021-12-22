@@ -15,6 +15,11 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
+    @Transactional(readOnly = true)
+    public User findUser(String username){
+        return userRepository.findByUsername(username).orElseGet(User::new);
+    }
+
     @Transactional
     public void userJoin(User user) {
 
@@ -25,14 +30,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-
     @Transactional
     public void updateUser(User user) {
         User persistance = userRepository.findById(user.getId())
                 .orElseThrow(() -> new IllegalArgumentException("회원 조회 실패"));
-        String rawPassword = user.getPassword();
-        String encPassword = encoder.encode(rawPassword);
-        persistance.setPassword(encPassword);
-        persistance.setEmail(user.getEmail());
+
+        if(persistance.getOauth() == null || persistance.getOauth().equals("")){
+            String rawPassword = user.getPassword();
+            String encPassword = encoder.encode(rawPassword);
+            persistance.setPassword(encPassword);
+            persistance.setEmail(user.getEmail());
+        }
     }
 }
