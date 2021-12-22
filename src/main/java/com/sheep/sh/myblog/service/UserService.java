@@ -15,11 +15,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder encoder;
 
-    @Transactional(readOnly = true)
-    public User findUser(String username){
-        return userRepository.findByUsername(username).orElseGet(User::new);
-    }
-
     @Transactional
     public void userJoin(User user) {
 
@@ -28,6 +23,12 @@ public class UserService {
         user.setPassword(encPassword);
         user.setRole(RoleType.USER);
         userRepository.save(user);
+    }
+
+
+    @Transactional(readOnly = true)
+    public User findUser(String username){
+        return userRepository.findByUsername(username).orElseGet(User::new);
     }
 
     @Transactional

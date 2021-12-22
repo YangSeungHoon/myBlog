@@ -20,5 +20,3 @@
         <a href="https://kauth.kakao.com/oauth/authorize?client_id=d089226fb3b1e8da009eec41b8dafd0c&redirect_uri=http://localhost:8000/auth/kakao/callback&response_type=code"><img height="38" src="/image/kakao_login_button.png"></a>
     </form>
 </div>
-
-<%@ include file="../layout/footer.jsp" %>

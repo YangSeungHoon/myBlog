@@ -29,10 +29,10 @@ public class User {
     @Column(nullable = false, length = 50)
     private String email;
 
+    private String oauth; //null 허용 가능. 카카오 로그인인지 확인하는 변수
+
     @Enumerated(EnumType.STRING)
     private RoleType role;
-
-    private String oauth; //null 허용 가능. 카카오 로그인인지 확인하는 변수
 
     @CreationTimestamp //시간 자동 입력
     private Timestamp createDate;
