@@ -3,6 +3,7 @@ package com.sheep.sh.myblog.controller.api;
 import com.sheep.sh.myblog.config.auth.PrincipalDetail;
 import com.sheep.sh.myblog.dto.ResponseDto;
 import com.sheep.sh.myblog.model.Board;
+import com.sheep.sh.myblog.model.Reply;
 import com.sheep.sh.myblog.model.User;
 import com.sheep.sh.myblog.service.BoardService;
 import com.sheep.sh.myblog.service.UserService;
@@ -34,6 +35,15 @@ public class BoardApiController {
     @PutMapping("/api/board/{id}")
     public ResponseDto<Integer> update(@PathVariable Long id, @RequestBody Board board) {
         boardService.updateBoard(id,board);
+        return new ResponseDto<>(HttpStatus.OK.value(),1);
+    }
+
+    @PostMapping("/api/board/{boardId}/reply")
+    public ResponseDto<Integer> replySave(@PathVariable Long boardId
+            ,@RequestBody Reply reply
+            , @AuthenticationPrincipal PrincipalDetail principal){
+
+        boardService.writeReply(principal.getUser(),boardId,reply);
         return new ResponseDto<>(HttpStatus.OK.value(),1);
     }
 }

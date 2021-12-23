@@ -1,5 +1,7 @@
 package com.sheep.sh.myblog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,7 +40,9 @@ public class Board {
     @JoinColumn(name="userId")
     private User user;
 
+    @OrderBy("id desc")
+    @JsonIgnoreProperties({"board"})
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
-    private List<Reply> reply;
+    private List<Reply> replys;
 
 }

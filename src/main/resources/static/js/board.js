@@ -11,6 +11,10 @@ let index = {
         $("#btn-update").on("click",()=> {
             this.update();
         });
+
+        $("#btn-reply-save").on("click",()=> {
+            this.replySave();
+        });
     },
 
     save: function(){
@@ -69,7 +73,26 @@ let index = {
         }).fail(function(err){
             alert(JSON.stringify(err));
         });
-    }
+    },
+
+    replySave: function(){
+        let data = {
+            content:$("#reply-content").val()
+        };
+        let boardId = $("#boardId").val();
+        $.ajax({
+            type:"POST",
+            url:`/api/board/${boardId}/reply`,
+            data: JSON.stringify(data),
+            contentType:"application/json; charset=utf-8",
+            dataType:"json"
+        }).done(function(res) {
+            console.log(boardId);
+            location.href=`/board/${boardId}`;
+        }).fail(function(err){
+            alert(JSON.stringify(err));
+        });
+    },
 }
 
 index.init();
