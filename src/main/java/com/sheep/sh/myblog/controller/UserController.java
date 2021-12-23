@@ -44,7 +44,6 @@ public class UserController {
 
     @GetMapping("/auth/loginForm")
     public String loginForm() {
-
         return "user/loginForm";
     }
 
@@ -83,8 +82,6 @@ public class UserController {
 
         try {
             oAuthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
