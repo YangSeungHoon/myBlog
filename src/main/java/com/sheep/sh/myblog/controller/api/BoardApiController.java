@@ -1,6 +1,7 @@
 package com.sheep.sh.myblog.controller.api;
 
 import com.sheep.sh.myblog.config.auth.PrincipalDetail;
+import com.sheep.sh.myblog.dto.ReplySaveRequestDto;
 import com.sheep.sh.myblog.dto.ResponseDto;
 import com.sheep.sh.myblog.model.Board;
 import com.sheep.sh.myblog.model.Reply;
@@ -39,11 +40,9 @@ public class BoardApiController {
     }
 
     @PostMapping("/api/board/{boardId}/reply")
-    public ResponseDto<Integer> replySave(@PathVariable Long boardId
-            ,@RequestBody Reply reply
-            , @AuthenticationPrincipal PrincipalDetail principal){
+    public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto){
 
-        boardService.writeReply(principal.getUser(),boardId,reply);
+        boardService.writeReply(replySaveRequestDto);
         return new ResponseDto<>(HttpStatus.OK.value(),1);
     }
 }

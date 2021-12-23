@@ -1,10 +1,12 @@
 package com.sheep.sh.myblog.service;
 
+import com.sheep.sh.myblog.dto.ReplySaveRequestDto;
 import com.sheep.sh.myblog.model.Board;
 import com.sheep.sh.myblog.model.Reply;
 import com.sheep.sh.myblog.model.User;
 import com.sheep.sh.myblog.repository.BoardRepository;
 import com.sheep.sh.myblog.repository.ReplyRepository;
+import com.sheep.sh.myblog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,7 @@ import java.util.List;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+    private final UserRepository userRepository;
     private final ReplyRepository replyRepository;
 
 
@@ -58,13 +61,18 @@ public class BoardService {
     }
 
     @Transactional
-    public void writeReply(User user, Long boardId, Reply reply) {
+    public void writeReply(ReplySaveRequestDto replySaveRequestDto) {
 
-        Board board = boardRepository.findById(boardId).orElseThrow(() ->
+        Board board = boardRepository.findById(replySaveRequestDto.getBoardId())
+                .orElseThrow(() ->
                 new IllegalArgumentException("댓글 쓰기 실패: 게시글 id를 찾을 수 없습니다."));
-        reply.setUser(user);
-        reply.setBoard(board);
 
+        User user = userRepository.findById(replySaveRequestDto.getUserId())
+                .orElseThrow(() ->
+                        new IllegalArgumentException("댓글 쓰기 실패: 유저 id를 찾을 수 없습니다."));
+
+        Reply reply = new Reply();
+        reply.update(user,board, replySaveRequestDto.getContent());
         replyRepository.save(reply);
     }
 }
