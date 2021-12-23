@@ -28,7 +28,6 @@ public class BoardApiController {
 
     @DeleteMapping("/api/board/{id}")
     public ResponseDto<Integer> deleteById(@PathVariable Long id){
-        System.out.println(id);
         boardService.deleteBoard(id);
         return new ResponseDto<>(HttpStatus.OK.value(),1);
     }

@@ -107,6 +107,7 @@ public class UserController {
                 String.class
         );
 
+
         ObjectMapper objectMapper2 = new ObjectMapper();
         KakaoProfile kakaoProfile = null;
 

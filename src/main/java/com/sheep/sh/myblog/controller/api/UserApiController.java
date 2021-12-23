@@ -1,7 +1,6 @@
 package com.sheep.sh.myblog.controller.api;
 
 import com.sheep.sh.myblog.dto.ResponseDto;
-import com.sheep.sh.myblog.model.RoleType;
 import com.sheep.sh.myblog.model.User;
 import com.sheep.sh.myblog.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,7 @@ public class UserApiController {
         userService.updateUser(user);
 
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
+                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseDto<>(HttpStatus.OK.value(), 1);
     }

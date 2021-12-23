@@ -74,7 +74,7 @@ public class BoardService {
 //        Reply reply = new Reply();
 //        reply.update(user,board, replySaveRequestDto.getContent());
 
-        int result = replyRepository.commentSave(replySaveRequestDto.getUserId()
+      replyRepository.commentSave(replySaveRequestDto.getUserId()
                 , replySaveRequestDto.getBoardId()
                 , replySaveRequestDto.getContent());
     }

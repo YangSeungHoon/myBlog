@@ -1,10 +1,9 @@
 package com.sheep.sh.myblog.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
+import lombok.*;
 
+
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

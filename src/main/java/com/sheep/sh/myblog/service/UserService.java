@@ -18,11 +18,15 @@ public class UserService {
     @Transactional
     public void userJoin(User user) {
 
-        String rawPassword = user.getPassword();
-        String encPassword = encoder.encode(rawPassword);
+        String rawPassword = user.getPassword(); // 1234 원문
+        String encPassword = encoder.encode(rawPassword); // 해쉬
         user.setPassword(encPassword);
         user.setRole(RoleType.USER);
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            throw new IllegalArgumentException("회원 가입에 실패했습니다.");
+        }
     }
 
 
