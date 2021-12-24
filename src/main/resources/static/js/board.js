@@ -95,6 +95,19 @@ let index = {
             alert(JSON.stringify(err));
         });
     },
+
+    replyDelete: function(boardId,replyId){
+
+        $.ajax({
+            type:"DELETE",
+            url:`/api/board/${boardId}/reply/${replyId}`,
+            dataType:"json"
+        }).done(function(res) {
+            location.href=`/board/${boardId}`;
+        }).fail(function(err){
+            alert(JSON.stringify(err));
+        });
+    },
 }
 
 index.init();

@@ -78,4 +78,9 @@ public class BoardService {
                 , replySaveRequestDto.getBoardId()
                 , replySaveRequestDto.getContent());
     }
+
+    @Transactional
+    public void deleteReply(Long replyId) {
+        replyRepository.deleteById(replyId);
+    }
 }
